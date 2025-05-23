@@ -1,25 +1,31 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: application-manager
+  name: multi-env-application-manager
   namespace: argocd
 spec:
   generators:
-  - git:
-      repoURL: https://github.com/dsfwoo8172/argocd-pratice.git
-      revision: main
-      files:
-        - path: charts/**/config.json
+  - matrix:
+      generators:
+      - git:
+          repoURL: https://github.com/dsfwoo8172/argocd-pratice.git
+          revision: main
+          files:
+            - path: charts/**/config.json
+      - list:
+          elements:
+          - env: prod
+          - env: test
   template:
     metadata:
-      name: '{{appName}}'
+      name: '{{appName}}-{{env}}'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
       project: '{{project}}'
       destination:
-        server: '{{destination.server}}'
-        namespace: '{{destination.namespace}}'
+        server: '{{environments[env].server}}'
+        namespace: '{{environments[env].namespace}}'
       sources:
         - repoURL: '{{source.repoURL}}'
           targetRevision: '{{source.targetRevision}}'
@@ -27,7 +33,7 @@ spec:
           helm:
             valueFiles:
               - values.yaml
-              - '{{valuesFile}}' # 後面的 values 會蓋過前面的
+              - '{{environments[env].valuesFile}}'
       syncPolicy:
         automated:
           prune: true

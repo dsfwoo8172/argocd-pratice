@@ -6,9 +6,16 @@
         "targetRevision": "main",
         "path": "charts/hello-world"
     },
-    "valuesFile": "values-prod.yaml",
-    "destination": {
-        "namespace": "hello-world",
-        "server": "https://kubernetes.default.svc"
+    "environments": {
+        "prod": {
+            "namespace": "hello-world-prod",
+            "server": "https://kubernetes.default.svc",
+            "valuesFile": "values-prod.yaml"
+        },
+        "test": {
+            "namespace": "hello-world-test",
+            "server": "https://kubernetes.default.svc",
+            "valuesFile": "values-test.yaml"
+        }
     }
 }
