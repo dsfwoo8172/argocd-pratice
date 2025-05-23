@@ -9,10 +9,10 @@ spec:
       repoURL: https://github.com/dsfwoo8172/argocd-pratice.git
       revision: main
       files:
-        - path: apps/**/config.json
+        - path: charts/**/config.json
   template:
     metadata:
-      name: '{{destination.namespace}}'
+      name: '{{appName}}'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
@@ -27,7 +27,7 @@ spec:
           helm:
             valueFiles:
               - values.yaml
-              - '{{valuesFile}}'
+              - '{{valuesFile}}' # 後面的 values 會蓋過前面的
       syncPolicy:
         automated:
           prune: true
