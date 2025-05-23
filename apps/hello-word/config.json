@@ -1,12 +1,14 @@
 {
     "project": "default",
+    "name": "hello-world",
     "source": {
         "repoURL": "https://github.com/dsfwoo8172/argocd-pratice.git",
         "targetRevision": "main",
-        "path": "minifests/nginx"
+        "path": "charts/hello-world"
     },
+    "valuesFile": "values-prod.yaml",
     "destination": {
-        "namespace": "nginx",
+        "namespace": "hello-world",
         "server": "https://kubernetes.default.svc"
     }
 }

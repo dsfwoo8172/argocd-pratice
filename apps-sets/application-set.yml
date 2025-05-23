@@ -23,10 +23,22 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+      destinations:
+        - server: '{{destination.server}}'
+          namespace: '{{destination.namespace}}'
       source:
+        chart: '{{name}}'
         repoURL: '{{source.repoURL}}'
         targetRevision: '{{source.targetRevision}}'
-        path: '{{source.path}}'
-      destination:
-        server: '{{destination.server}}'
-        namespace: '{{destination.namespace}}'
+        helm:
+          valueFiles:
+            - values.yaml
+            - '{{valuesFile}}'
+      # source:
+      #   repoURL: '{{source.repoURL}}'
+      #   targetRevision: '{{source.targetRevision}}'
+      #   path: '{{source.path}}'
+      #   valuesFile: '{{source.valuesFile}}'
+      # destination:
+      #   server: '{{destination.server}}'
+      #   namespace: '{{destination.namespace}}'
