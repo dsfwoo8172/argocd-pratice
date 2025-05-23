@@ -22,7 +22,7 @@ spec:
                 - env: test
   template:
     metadata:
-      name: '{{.appName}}-{{.env}}'
+      name: '{{.path.basename}}-{{.env}}'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
