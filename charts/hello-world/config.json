@@ -1,21 +1,22 @@
-{
-    "project": "default",
-    "appName": "hello-world",
-    "source": {
-        "repoURL": "https://github.com/dsfwoo8172/argocd-pratice.git",
-        "targetRevision": "main",
-        "path": "charts/hello-world"
+[
+    {
+      "env": "test",
+      "server": "https://kubernetes.default.svc",
+      "namespace": "hello-world-test",
+      "replicaCount": 1,
+      "valuesFile": "values-test.yaml",
+      "image": {
+        "tag": "1.21"
+      }
     },
-    "environments": {
-        "prod": {
-            "namespace": "hello-world-prod",
-            "server": "https://kubernetes.default.svc",
-            "valuesFile": "values-prod.yaml"
-        },
-        "test": {
-            "namespace": "hello-world-test",
-            "server": "https://kubernetes.default.svc",
-            "valuesFile": "values-test.yaml"
-        }
+    {
+      "env": "prod",
+      "server": "https://kubernetes.default.svc", 
+      "namespace": "hello-world-prod",
+      "replicaCount": 3,
+      "valuesFile": "values-prod.yaml",
+      "image": {
+        "tag": "1.21"
+      }
     }
-}
+  ]

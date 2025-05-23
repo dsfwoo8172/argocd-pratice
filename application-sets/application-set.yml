@@ -5,35 +5,30 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - matrix:
-      generators:
-      - git:
-          repoURL: https://github.com/dsfwoo8172/argocd-pratice.git
-          revision: main
-          files:
-            - path: charts/**/config.json
-      - list:
-          elements:
-          - env: prod
-          - env: test
+    generators:
+    - git:
+        repoURL: https://github.com/dsfwoo8172/argocd-pratice.git
+        revision: main
+        files:
+          - path: charts/**/config.json
   template:
     metadata:
-      name: '{{appName}}-{{env}}'
+      name: '{{env}}-hello-world'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
-      project: '{{project}}'
+      project: default
       destination:
-        server: '{{environments[env].server}}'
-        namespace: '{{environments[env].namespace}}'
+        server: '{{server}}'
+        namespace: '{{namespace}}'
       sources:
-        - repoURL: '{{source.repoURL}}'
-          targetRevision: '{{source.targetRevision}}'
-          path: '{{source.path}}'
+        - repoURL: https://github.com/dsfwoo8172/argocd-pratice.git
+          targetRevision: main
+          path: charts/hello-world
           helm:
             valueFiles:
               - values.yaml
-              - '{{environments[env].valuesFile}}'
+              - '{{valuesFile}}'
       syncPolicy:
         automated:
           prune: true
