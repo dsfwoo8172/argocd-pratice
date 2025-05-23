@@ -21,13 +21,13 @@ spec:
         server: '{{destination.server}}'
         namespace: '{{destination.namespace}}'
       sources:
-        - chart: '{{name}}'
-          repoURL: '{{source.repoURL}}'
+        - repoURL: '{{source.repoURL}}'
           targetRevision: '{{source.targetRevision}}'
+          path: '{{source.path}}'
           helm:
-          valueFiles:
-            - values.yaml
-            - '{{valuesFile}}'
+            valueFiles:
+              - values.yaml
+              - '{{valuesFile}}'
       syncPolicy:
         automated:
           prune: true
