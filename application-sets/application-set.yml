@@ -4,6 +4,9 @@ metadata:
   name: multi-env-application-manager
   namespace: argocd
 spec:
+  # https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/GoTemplate/
+  goTemplate: true # enable to use golang syntax in the application set
+  goTemplateOptions: ["missingkey=error"] # error if the key is missing
   generators:
     - matrix:
         generators:
@@ -13,27 +16,28 @@ spec:
               files:
                 - path: charts/**/config.json
           - list:
+              # Refer to environment variables in the config.json
               elements:
                 - env: prod
                 - env: test
   template:
     metadata:
-      name: '{{appName}}-{{.env}}'
+      name: '{{.appName}}-{{.env}}'
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
-      project: '{{project}}'
+      project: '{{.project}}'
       destination:
-        server: '{{environments.{{.env}}.server}}'
-        namespace: '{{environments.{{.env}}.namespace}}'
+        server: '{{index .environments .env "server"}}'
+        namespace: '{{index .environments .env "namespace"}}'
       sources:
-        - repoURL: '{{source.repoURL}}'
-          targetRevision: '{{source.targetRevision}}'
-          path: '{{source.path}}'
+        - repoURL: '{{.source.repoURL}}'
+          targetRevision: '{{.source.targetRevision}}'
+          path: '{{.source.path}}'
           helm:
             valueFiles:
               - values.yaml
-              - '{{environments.{{.env}}.valuesFile}}'
+              - '{{index .environments .env "valuesFile"}}'
       syncPolicy:
         automated:
           prune: true
