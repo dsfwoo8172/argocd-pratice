@@ -17,20 +17,20 @@ spec:
         - resources-finalizer.argocd.argoproj.io
     spec:
       project: '{{project}}'
+      destination:
+        server: '{{destination.server}}'
+        namespace: '{{destination.namespace}}'
+      sources:
+        - chart: '{{name}}'
+          repoURL: '{{source.repoURL}}'
+          targetRevision: '{{source.targetRevision}}'
+          helm:
+          valueFiles:
+            - values.yaml
+            - '{{valuesFile}}'
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
-      destination:
-        server: '{{destination.server}}'
-        namespace: '{{destination.namespace}}'
-      source:
-        chart: '{{name}}'
-        repoURL: '{{source.repoURL}}'
-        targetRevision: '{{source.targetRevision}}'
-        helm:
-          valueFiles:
-            - values.yaml
-            - '{{valuesFile}}'
