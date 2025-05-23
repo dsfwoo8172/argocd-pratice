@@ -1,6 +1,7 @@
 {
     "project": "default",
     "appName": "hello-world",
+    "namespace": "backend",
     "source": {
         "repoURL": "https://github.com/dsfwoo8172/argocd-pratice.git",
         "targetRevision": "main",
@@ -8,12 +9,10 @@
     },
     "environments": {
         "prod": {
-            "namespace": "hello-world-prod",
             "server": "https://kubernetes.default.svc",
             "valuesFile": "values-prod.yaml"
         },
         "test": {
-            "namespace": "hello-world-test",
             "server": "https://kubernetes.default.svc",
             "valuesFile": "values-test.yaml"
         }
