@@ -22,7 +22,7 @@ spec:
                 - env: test
   template:
     metadata:
-      name: '{{.path.basename}}-{{.env}}'
+      name: '{{.path.basename}}-{{.env}}' # path.basename is the name of Sub-Folder
       finalizers:
         - resources-finalizer.argocd.argoproj.io
     spec:
