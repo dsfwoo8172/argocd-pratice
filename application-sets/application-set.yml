@@ -28,7 +28,6 @@ spec:
     spec:
       project: '{{.project}}'
       destination:
-        # server: '{{index .environments .env "server"}}'
         name: '{{index .environments .env "clusterName"}}'
         namespace: '{{.namespace}}'
       sources:
