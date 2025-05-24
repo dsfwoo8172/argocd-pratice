@@ -10,10 +10,7 @@ spec:
   destinations:
     - namespace: backend
       server: https://kubernetes.default.svc
-      name: prod-cluster
-    - namespace: backend
-      server: https://kubernetes.default.svc
-      name: test-cluster
+      name: minikube
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'

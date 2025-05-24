@@ -28,7 +28,7 @@ spec:
     spec:
       project: '{{.project}}'
       destination:
-        name: '{{index .environments .env "destination"}}'
+        name: '{{.destinationName}}'
         # server: '{{index .environments .env "server"}}'
         # namespace: '{{.namespace}}'
       sources:

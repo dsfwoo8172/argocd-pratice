@@ -1,5 +1,6 @@
 {
     "project": "backend-project",
+    "destinationName": "minikube",
     "namespace": "backend",
     "source": {
         "repoURL": "https://github.com/dsfwoo8172/argocd-pratice.git",
@@ -9,13 +10,11 @@
     "environments": {
         "prod": {
             "server": "https://kubernetes.default.svc",
-            "valuesFile": "values-prod.yaml",
-            "destination": "prod-cluster"
+            "valuesFile": "values-prod.yaml"
         },
         "test": {
             "server": "https://kubernetes.default.svc",
-            "valuesFile": "values-test.yaml",
-            "destination": "test-cluster"
+            "valuesFile": "values-test.yaml"
         }
     }
 }
