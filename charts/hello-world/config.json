@@ -9,11 +9,13 @@
     "environments": {
         "prod": {
             "server": "https://kubernetes.default.svc",
-            "valuesFile": "values-prod.yaml"
+            "valuesFile": "values-prod.yaml",
+            "clusterName": "in-cluster"
         },
         "test": {
             "server": "https://kubernetes.default.svc",
-            "valuesFile": "values-test.yaml"
+            "valuesFile": "values-test.yaml",
+            "clusterName": "in-cluster"
         }
     }
 }
