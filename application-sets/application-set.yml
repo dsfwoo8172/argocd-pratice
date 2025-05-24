@@ -28,8 +28,9 @@ spec:
     spec:
       project: '{{.project}}'
       destination:
-        server: '{{index .environments .env "server"}}'
-        namespace: '{{.namespace}}'
+        name: '{{index .environments .env "destination"}}'
+        # server: '{{index .environments .env "server"}}'
+        # namespace: '{{.namespace}}'
       sources:
         - repoURL: '{{.source.repoURL}}'
           targetRevision: '{{.source.targetRevision}}'

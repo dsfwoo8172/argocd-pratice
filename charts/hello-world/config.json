@@ -1,5 +1,5 @@
 {
-    "project": "default",
+    "project": "backend-project",
     "namespace": "backend",
     "source": {
         "repoURL": "https://github.com/dsfwoo8172/argocd-pratice.git",
@@ -9,11 +9,13 @@
     "environments": {
         "prod": {
             "server": "https://kubernetes.default.svc",
-            "valuesFile": "values-prod.yaml"
+            "valuesFile": "values-prod.yaml",
+            "destination": "prod-cluster"
         },
         "test": {
             "server": "https://kubernetes.default.svc",
-            "valuesFile": "values-test.yaml"
+            "valuesFile": "values-test.yaml",
+            "destination": "test-cluster"
         }
     }
 }

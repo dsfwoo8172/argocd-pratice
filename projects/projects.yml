@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: backend-project
+  namespace: argocd
+spec:
+  description: "Backend Project"
+  sourceRepos:
+    - https://github.com/dsfwoo8172/argocd-pratice.git
+  destinations:
+    - namespace: backend
+      server: https://kubernetes.default.svc
+      name: prod-cluster
+    - namespace: backend
+      server: https://kubernetes.default.svc
+      name: test-cluster
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+
+# ---
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: AppProject
+# metadata:
+#   name: team-b
+#   namespace: argocd
+# spec:
+#   description: "Team B"
+#   sourceRepos: ["*"]
+#   destinations:
+#     - namespace: team-b
+#       server: https://kubernetes.default.svc
+#   clusterResourceWhitelist:
+#   - group: '*'
+#     kind: '*'
